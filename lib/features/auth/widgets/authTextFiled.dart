@@ -1,12 +1,19 @@
 import 'package:flutter/material.dart';
 
 class AuthTextFiled extends StatelessWidget {
-  const AuthTextFiled({super.key});
+  const AuthTextFiled({
+    Key? key,
+    required this.hintText,
+    required this.inputController,
+  }) : super(key: key);
+
+  final String hintText;
+  final TextEditingController inputController;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 30),
+      padding: EdgeInsets.symmetric(horizontal: 30),
       child: Container(
         height: 60,
         width: double.infinity,
@@ -15,10 +22,11 @@ class AuthTextFiled extends StatelessWidget {
           color: Colors.white,
           borderRadius: BorderRadius.circular(20),
         ),
-        child: const Center(
+        child: Center(
           child: TextField(
+            controller: inputController,
             decoration: InputDecoration(
-              hintText: 'Username, email or mobile number',
+              hintText: hintText,
               hintStyle:
                   TextStyle(fontFamily: 'Mitr', color: Color(0xFFB0B0B0)),
               border: InputBorder.none,
