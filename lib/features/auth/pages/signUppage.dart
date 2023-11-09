@@ -5,15 +5,17 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class LoginPage extends ConsumerStatefulWidget {
-  const LoginPage({super.key});
+class SignUpPage extends ConsumerStatefulWidget {
+  const SignUpPage({super.key});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _LoginPageState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _SignUpPageState();
 }
 
-class _LoginPageState extends ConsumerState<LoginPage> {
+class _SignUpPageState extends ConsumerState<SignUpPage> {
   final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   bool _isLoading = false;
 
@@ -41,7 +43,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
             ),
           ),
           const SizedBox(
-            height: 100,
+            height: 70,
           ),
           Image.asset(
             "assets/images/instagram logo.png",
@@ -49,11 +51,19 @@ class _LoginPageState extends ConsumerState<LoginPage> {
             width: 60,
           ),
           const SizedBox(
-            height: 100,
+            height: 70,
           ),
           AuthTextFiled(
-              hintText: 'Username, email or mobile number',
-              inputController: _emailController),
+              hintText: 'Full name', inputController: _nameController),
+          const SizedBox(
+            height: 20,
+          ),
+          AuthTextFiled(
+              hintText: 'Username', inputController: _usernameController),
+          const SizedBox(
+            height: 20,
+          ),
+          AuthTextFiled(hintText: 'Email', inputController: _emailController),
           const SizedBox(
             height: 20,
           ),
@@ -90,16 +100,16 @@ class _LoginPageState extends ConsumerState<LoginPage> {
             ),
           ),
           const SizedBox(
-            height: 150,
+            height: 80,
           ),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 30),
             child: ElevatedButton(
                 onPressed: () {
-                   context.go('/Signup');
+                  context.go('/');
                 },
                 child: Text(
-                  "Create new account",
+                  "Login to your account",
                   style: GoogleFonts.mitr(color: loginButtoncolor),
                 ),
                 style: ElevatedButton.styleFrom(
