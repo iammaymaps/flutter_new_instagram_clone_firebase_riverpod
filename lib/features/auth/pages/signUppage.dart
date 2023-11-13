@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_new_instagram_clone_firebase_riverpod/features/auth/domain/authController.dart';
 import 'package:flutter_new_instagram_clone_firebase_riverpod/features/auth/utils.dart';
 import 'package:flutter_new_instagram_clone_firebase_riverpod/features/auth/widgets/authTextFiled.dart';
 import 'package:flutter_new_instagram_clone_firebase_riverpod/theme/colors.dart';
@@ -30,6 +31,18 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
       setState(() {
         profileImage = bytes;
       });
+    }
+  }
+
+  void createUserWithEmailandPassword() {
+    if (profileImage != null) {
+      ref.read(authControllerProvider.notifier).signUpWithEmailandPassword(
+          context,
+          _emailController.text.trim(),
+          _passwordController.text.trim(),
+          _usernameController.text.trim(),
+          _nameController.text.trim(),
+          profileImage!);
     }
   }
 
@@ -64,7 +77,8 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
               children: [
                 profileImage != null
                     ? CircleAvatar(
-                        radius: 80, backgroundImage: MemoryImage(profileImage!),
+                        radius: 80,
+                        backgroundImage: MemoryImage(profileImage!),
                       )
                     : const CircleAvatar(
                         radius: 80,
@@ -108,9 +122,9 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 30),
               child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: createUserWithEmailandPassword,
                   child: Text(
-                    "Login",
+                    'Sign Up',
                     style: GoogleFonts.mitr(),
                   ),
                   style: ElevatedButton.styleFrom(
