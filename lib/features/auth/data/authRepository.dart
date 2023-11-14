@@ -30,6 +30,8 @@ class AuthRepository {
   CollectionReference get _users =>
       firestore.collection(FirebaseConstants.usersCollection);
 
+  Stream<User?> get authStateChange => firebaseAuth.authStateChanges();
+
   FutureEither<UserModel> signUpWithEmailandPassword(
       {required String email,
       required String password,
