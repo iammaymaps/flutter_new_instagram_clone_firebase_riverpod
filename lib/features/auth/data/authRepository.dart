@@ -79,4 +79,20 @@ class AuthRepository {
     return _users.doc(uid).snapshots().map(
         (event) => UserModel.fromMap(event.data() as Map<String, dynamic>));
   }
+
+  FutureEither<UserModel> loginUser({
+    required String email,
+    required String password,
+  }) async {
+    try {
+      UserCredential userCredential = await firebaseAuth
+          .signInWithEmailAndPassword(email: email, password: password);
+      UserModel userModel = await getUserdata(userCredential.user!.uid).first;
+      return right(userModel);
+    } on FirebaseAuthException catch (e) {
+      throw e.message!;
+    } catch (e) {
+      return left(Failure(e.toString()));
+    }
+  }
 }

@@ -20,7 +20,7 @@ final authControllerProvider = StateNotifierProvider<AuthController, bool>(
         authRepository: ref.watch(authRepositoryProvider), ref: ref));
 
 final getUserdataProvider = StreamProvider.family((ref, String uid) {
-  final authController = ref.read(authControllerProvider.notifier);
+  final authController = ref.watch(authControllerProvider.notifier);
   return authController.getUserData(uid);
 });
 
@@ -52,5 +52,20 @@ class AuthController extends StateNotifier<bool> {
 
   Stream<UserModel> getUserData(String uid) {
     return authRepository.getUserdata(uid);
+  }
+
+  void loginUser(
+    BuildContext context,
+    String email,
+    String password,
+  ) async {
+    state = true;
+    final user =
+        await authRepository.loginUser(email: email, password: password);
+    state = false;
+    user.fold(
+        (l) => showSnackbar(context, l.message),
+        (userModel) =>
+            ref.read(userProvider.notifier).update((state) => userModel));
   }
 }

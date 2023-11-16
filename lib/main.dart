@@ -29,12 +29,20 @@ class _MyAppState extends ConsumerState<MyApp> {
   UserModel? userModel;
 
   void getData(WidgetRef widgetRef, User data) async {
-    userModel = await ref
+    userModel = await widgetRef
         .watch(authControllerProvider.notifier)
         .getUserData(data.uid)
         .first;
-    ref.read(userProvider.notifier).update((state) => userModel);
-    setState(() {});
+
+    // Check if userModel is not null before updating state
+    if (userModel != null) {
+      ref.read(userProvider.notifier).update((state) => userModel);
+      setState(() {});
+    } else {
+      // Handle the case when userModel is null
+      // You might want to show an error message or take other appropriate actions
+      print("User data is null");
+    }
   }
 
   @override
