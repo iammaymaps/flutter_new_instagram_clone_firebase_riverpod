@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_new_instagram_clone_firebase_riverpod/HomeScreen.dart';
 import 'package:flutter_new_instagram_clone_firebase_riverpod/features/auth/Loader.dart';
 import 'package:flutter_new_instagram_clone_firebase_riverpod/features/auth/domain/authController.dart';
 import 'package:flutter_new_instagram_clone_firebase_riverpod/features/auth/errorText.dart';
@@ -27,45 +28,56 @@ class MyApp extends ConsumerStatefulWidget {
 
 class _MyAppState extends ConsumerState<MyApp> {
   UserModel? userModel;
-
   void getData(WidgetRef widgetRef, User data) async {
-    userModel = await widgetRef
-        .watch(authControllerProvider.notifier)
-        .getUserData(data.uid)
-        .first;
+    try {
+      userModel = await widgetRef
+          .watch(authControllerProvider.notifier)
+          .getUserData(data.uid)
+          .first;
 
-    // Check if userModel is not null before updating state
-    if (userModel != null) {
-      ref.read(userProvider.notifier).update((state) => userModel);
-      setState(() {});
-    } else {
-      // Handle the case when userModel is null
-      // You might want to show an error message or take other appropriate actions
-      print("User data is null");
+      // Check if userModel is not null and is a valid map before updating state
+      if (userModel != null && userModel is Map<String, dynamic>) {
+        ref.read(userProvider.notifier).update((state) => userModel);
+        setState(() {});
+      } else {
+        // Handle the case when userModel is null or not a valid map
+        print("User data is null or not a valid map");
+      }
+    } catch (error, stackTrace) {
+      // Handle the error, log it, or show an error message
+      print("Error fetching user data: $error");
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return ref.watch(authStateChangeProvider).when(
-        data: (data) {
-          if (data != null) {
-            getData(ref, data);
-            if (userModel != null) {
-              return MaterialApp.router(
-                theme: ThemeData(scaffoldBackgroundColor: Colors.white),
-                debugShowCheckedModeBanner: false,
-                routerConfig: loggedInRoute,
-              );
-            }
-          }
-          return MaterialApp.router(
-            theme: ThemeData(scaffoldBackgroundColor: Colors.white),
-            debugShowCheckedModeBanner: false,
-            routerConfig: loggedOutRoute,
-          );
-        },
-        error: (error, StackTrace) => ErrorText(error: error.toString()),
-        loading: () => const Loader());
+    return MaterialApp(
+      theme: ThemeData(
+        scaffoldBackgroundColor: Colors.black, // Set overall background color
+      ),
+      debugShowCheckedModeBanner: false,
+      home: HomeScreen(),
+    );
+
+    // ref.watch(authStateChangeProvider).when(
+    //     data: (data) {
+    //       if (data != null) {
+    //         getData(ref, data);
+    //         if (userModel != null) {
+    //           return MaterialApp.router(
+    //             theme: ThemeData(scaffoldBackgroundColor: Colors.white),
+    //             debugShowCheckedModeBanner: false,
+    //             routerConfig: loggedInRoute,
+    //           );
+    //         }
+    //       }
+    //       return MaterialApp.router(
+    //         theme: ThemeData(scaffoldBackgroundColor: Colors.white),
+    //         debugShowCheckedModeBanner: false,
+    //         routerConfig: loggedOutRoute,
+    //       );
+    //     },
+    //     error: (error, StackTrace) => ErrorText(error: error.toString()),
+    //     loading: () => const Loader());
   }
 }

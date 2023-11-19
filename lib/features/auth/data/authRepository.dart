@@ -48,7 +48,8 @@ class AuthRepository {
         UserCredential userCredential = await firebaseAuth
             .createUserWithEmailAndPassword(email: email, password: password);
 
-        if (userCredential.additionalUserInfo!.isNewUser) {
+        if (userCredential.additionalUserInfo != null &&
+            userCredential.additionalUserInfo!.isNewUser) {
           String photoUrl = await storageRepository.uploadProfileImage(
               userCredential.user!.uid, file);
 
