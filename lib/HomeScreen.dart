@@ -1,20 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_new_instagram_clone_firebase_riverpod/features/Post/PostWiget.dart';
+import 'package:flutter_new_instagram_clone_firebase_riverpod/features/auth/domain/authController.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends ConsumerStatefulWidget {
   HomeScreen({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  ConsumerState<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends ConsumerState<HomeScreen> {
   int _selectedIndex = 0;
 
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
     });
+  }
+
+  void logoutuser() {
+    ref.read(authControllerProvider.notifier).logOutUser();
   }
 
   @override
@@ -36,7 +43,7 @@ class _HomeScreenState extends State<HomeScreen> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 5),
               child: IconButton(
-                onPressed: () {},
+                onPressed: logoutuser,
                 icon: Icon(
                   Icons.send_rounded,
                 ),
@@ -49,7 +56,12 @@ class _HomeScreenState extends State<HomeScreen> {
             height: 45,
             width: 45,
           )),
-      body: Column(children: [Text("I am alright ")]),
+      body: Column(children: [
+        SizedBox(
+          height: 100,
+        ),
+        PostWidget()
+      ]),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Colors.black,
         selectedItemColor: Colors.white,
@@ -76,11 +88,6 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.tv_rounded),
-            backgroundColor: Colors.black,
-            label: '',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.account_circle_rounded),
             backgroundColor: Colors.black,
             label: '',
           ),

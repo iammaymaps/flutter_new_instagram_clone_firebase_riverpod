@@ -59,25 +59,25 @@ class _MyAppState extends ConsumerState<MyApp> {
       home: HomeScreen(),
     );
 
-    // ref.watch(authStateChangeProvider).when(
-    //     data: (data) {
-    //       if (data != null) {
-    //         getData(ref, data);
-    //         if (userModel != null) {
-    //           return MaterialApp.router(
-    //             theme: ThemeData(scaffoldBackgroundColor: Colors.white),
-    //             debugShowCheckedModeBanner: false,
-    //             routerConfig: loggedInRoute,
-    //           );
+    //   ref.watch(authStateChangeProvider).when(
+    //       data: (data) {
+    //         if (data != null) {
+    //           getData(ref, data);
+    //           if (userModel != null) {
+    //             return MaterialApp.router(
+    //               theme: ThemeData(scaffoldBackgroundColor: Colors.white),
+    //               debugShowCheckedModeBanner: false,
+    //               routerConfig: loggedInRoute,
+    //             );
+    //           }
     //         }
-    //       }
-    //       return MaterialApp.router(
-    //         theme: ThemeData(scaffoldBackgroundColor: Colors.white),
-    //         debugShowCheckedModeBanner: false,
-    //         routerConfig: loggedOutRoute,
-    //       );
-    //     },
-    //     error: (error, StackTrace) => ErrorText(error: error.toString()),
-    //     loading: () => const Loader());
+    //         return MaterialApp.router(
+    //           theme: ThemeData(scaffoldBackgroundColor: Colors.white),
+    //           debugShowCheckedModeBanner: false,
+    //           routerConfig: loggedOutRoute,
+    //         );
+    //       },
+    //       error: (error, StackTrace) => ErrorText(error: error.toString()),
+    //       loading: () => const Loader());
   }
 }

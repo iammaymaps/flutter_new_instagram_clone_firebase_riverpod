@@ -96,4 +96,8 @@ class AuthRepository {
       return left(Failure(e.toString()));
     }
   }
+
+  Future<void> logoutuser() async {
+    await firebaseAuth.signOut();
+  }
 }

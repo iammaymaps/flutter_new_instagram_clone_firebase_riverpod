@@ -60,6 +60,8 @@ flutter:
   assets:
     - assets/images/instagram logo.png
     - assets/images/meta logo.png
+    - assets/images/porifle Test.png
+    - assets/images/Post image test.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
   # For details regarding adding assets from package dependencies, see
