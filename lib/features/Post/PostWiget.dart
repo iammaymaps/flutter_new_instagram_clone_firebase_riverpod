@@ -8,8 +8,8 @@ class PostWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 620,
-      color: Colors.white,
+      height: 630,
+      color: Colors.black,
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 25),
         child: Column(
@@ -35,16 +35,16 @@ class PostWidget extends StatelessWidget {
                       Text(
                         "memezar",
                         style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 17),
+                            fontWeight: FontWeight.bold,
+                            fontSize: 17,
+                            color: Colors.white),
                       ),
                     ],
                   ),
                   IconButton(
                       onPressed: () {},
-                      icon: const Icon(
-                        Icons.more_vert_outlined,
-                        size: 25,
-                      ))
+                      icon: const Icon(Icons.more_vert_outlined,
+                          size: 25, color: Colors.white))
                 ],
               ),
             ),
@@ -67,32 +67,28 @@ class PostWidget extends StatelessWidget {
                   children: [
                     IconButton(
                         onPressed: () {},
-                        icon: const Icon(
-                          Icons.favorite_border_rounded,
-                        )),
+                        icon: const Icon(Icons.favorite_border_rounded,
+                            color: Colors.white)),
                     const SizedBox(
                       width: 5,
                     ),
                     IconButton(
                         onPressed: () {},
-                        icon: const Icon(
-                          Icons.chat_bubble_outline_rounded,
-                        )),
+                        icon: const Icon(Icons.chat_bubble_outline_rounded,
+                            color: Colors.white)),
                     const SizedBox(
                       width: 5,
                     ),
                     IconButton(
                         onPressed: () {},
-                        icon: const Icon(
-                          Icons.send_rounded,
-                        )),
+                        icon: const Icon(Icons.send_rounded,
+                            color: Colors.white)),
                   ],
                 ),
                 IconButton(
                     onPressed: () {},
-                    icon: const Icon(
-                      Icons.bookmark_border_rounded,
-                    )),
+                    icon: const Icon(Icons.bookmark_border_rounded,
+                        color: Colors.white)),
               ],
             ),
             const SizedBox(
@@ -104,7 +100,10 @@ class PostWidget extends StatelessWidget {
                 children: [
                   Text(
                     "241 likes",
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 17,
+                        color: Colors.white),
                   ),
                 ],
               ),
@@ -117,12 +116,15 @@ class PostWidget extends StatelessWidget {
               child: ReadMoreText(
                 'Flutter is Google’s mobile UI open source framework to build high-quality native (super fast) interfaces for iOS and Android apps with the unified codebase.',
                 trimLines: 1,
+                style: TextStyle(color: Colors.white),
                 colorClickableText: Colors.pink,
                 trimMode: TrimMode.Line,
                 trimCollapsedText: 'Show more',
                 trimExpandedText: 'Show less',
-                moreStyle:
-                    TextStyle(fontSize: 14, fontWeight: FontWeight.normal),
+                moreStyle: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.normal,
+                    color: Colors.white),
               ),
             ),
             const SizedBox(
@@ -137,7 +139,24 @@ class PostWidget extends StatelessWidget {
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 15,
-                        color: Colors.black),
+                        color: Colors.white),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(
+              height: 5,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: Row(
+                children: [
+                  Text(
+                    "Octuber 10",
+                    style: TextStyle(
+                        fontWeight: FontWeight.normal,
+                        fontSize: 13,
+                        color: Colors.grey),
                   ),
                 ],
               ),
