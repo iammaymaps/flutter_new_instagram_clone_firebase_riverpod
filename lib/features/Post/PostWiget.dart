@@ -2,13 +2,31 @@ import 'package:flutter/material.dart';
 import 'package:readmore/readmore.dart';
 
 class PostWidget extends StatelessWidget {
-  const PostWidget({super.key});
-
+  const PostWidget({
+    Key? key,
+    required this.likePressed,
+    required this.writeComments,
+    required this.sharePressed,
+    required this.viewAllComments,
+    required this.profileImageName,
+    required this.postImageName,
+    required this.userName,
+    required this.likes,
+    required this.postTitel,
+  }) : super(key: key);
+  final VoidCallback likePressed;
+  final VoidCallback writeComments;
+  final VoidCallback sharePressed;
+  final VoidCallback viewAllComments;
+  final String profileImageName;
+  final String postImageName;
+  final String userName;
+  final String likes;
+  final String postTitel;
   @override
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 630,
       color: Colors.black,
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 25),
@@ -25,7 +43,7 @@ class PostWidget extends StatelessWidget {
                         radius: 30,
                         child: ClipOval(
                             child: Image.asset(
-                          "assets/images/porifle Test.png",
+                          profileImageName,
                           fit: BoxFit.cover,
                         )),
                       ),
@@ -33,7 +51,7 @@ class PostWidget extends StatelessWidget {
                         width: 10,
                       ),
                       Text(
-                        "memezar",
+                        userName,
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 17,
@@ -52,7 +70,7 @@ class PostWidget extends StatelessWidget {
               height: 10,
             ),
             Image.asset(
-              "assets/images/Post image test.png",
+              postImageName,
               fit: BoxFit.cover,
               width: double.infinity,
               height: 350,
@@ -66,21 +84,21 @@ class PostWidget extends StatelessWidget {
                 Row(
                   children: [
                     IconButton(
-                        onPressed: () {},
+                        onPressed: likePressed,
                         icon: const Icon(Icons.favorite_border_rounded,
                             color: Colors.white)),
                     const SizedBox(
                       width: 5,
                     ),
                     IconButton(
-                        onPressed: () {},
+                        onPressed: writeComments,
                         icon: const Icon(Icons.chat_bubble_outline_rounded,
                             color: Colors.white)),
                     const SizedBox(
                       width: 5,
                     ),
                     IconButton(
-                        onPressed: () {},
+                        onPressed: sharePressed,
                         icon: const Icon(Icons.send_rounded,
                             color: Colors.white)),
                   ],
@@ -99,7 +117,7 @@ class PostWidget extends StatelessWidget {
               child: Row(
                 children: [
                   Text(
-                    "241 likes",
+                    likes,
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 17,
@@ -112,26 +130,32 @@ class PostWidget extends StatelessWidget {
               height: 6,
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 5),
-              child: ReadMoreText(
-                'Flutter is Google’s mobile UI open source framework to build high-quality native (super fast) interfaces for iOS and Android apps with the unified codebase.',
-                trimLines: 1,
-                style: TextStyle(color: Colors.white),
-                colorClickableText: Colors.pink,
-                trimMode: TrimMode.Line,
-                trimCollapsedText: 'Show more',
-                trimExpandedText: 'Show less',
-                moreStyle: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.normal,
-                    color: Colors.white),
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: Container(
+                alignment: Alignment.topLeft,
+                child: Flexible(
+                  child: ReadMoreText(
+                    postTitel,
+                    trimLines: 1,
+                    style: TextStyle(color: Colors.white),
+                    colorClickableText: Colors.pink,
+                    trimMode: TrimMode.Line,
+                    textAlign: TextAlign.left,
+                    trimCollapsedText: 'Show more',
+                    trimExpandedText: '  Show less',
+                    moreStyle: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.normal,
+                        color: Colors.white),
+                  ),
+                ),
               ),
             ),
             const SizedBox(
               height: 5,
             ),
             TextButton(
-              onPressed: () {},
+              onPressed: viewAllComments,
               child: Row(
                 children: [
                   Text(

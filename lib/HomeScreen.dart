@@ -60,7 +60,17 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         SizedBox(
           height: 100,
         ),
-        PostWidget()
+        PostWidget(
+            likePressed: () {},
+            writeComments: () {},
+            sharePressed: () {},
+            viewAllComments: () {},
+            profileImageName: "assets/images/ProfilePcture3.png",
+            postImageName: "assets/images/Post image 1.png",
+            userName: "iamsiam",
+            likes: "158",
+            postTitel:
+                'Flutter is Google’s mobile UI open source framework to build high-quality native (super fast) interfaces for iOS and Android apps with the unified codebase.'),
       ]),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Colors.black,
