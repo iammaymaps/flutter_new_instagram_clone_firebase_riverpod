@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_new_instagram_clone_firebase_riverpod/features/BottomPage/HomePageScreen.dart';
+import 'package:flutter_new_instagram_clone_firebase_riverpod/features/BottomPage/ReelsWatch.dart';
+import 'package:flutter_new_instagram_clone_firebase_riverpod/features/BottomPage/SearchScreen.dart';
+import 'package:flutter_new_instagram_clone_firebase_riverpod/features/BottomPage/addPostScreen.dart';
+import 'package:flutter_new_instagram_clone_firebase_riverpod/features/BottomPage/profileScreen.dart';
 import 'package:flutter_new_instagram_clone_firebase_riverpod/features/Post/PostWiget.dart';
 import 'package:flutter_new_instagram_clone_firebase_riverpod/features/auth/domain/authController.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -24,54 +29,18 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     ref.read(authControllerProvider.notifier).logOutUser();
   }
 
+  List<Widget> pages = [
+    HomePageScreen(),
+    SearchScreen(),
+    AddPostScreen(),
+    ReelsWatch(),
+    ProfileScreen(),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-          toolbarHeight: 80.0, // Set the desired height
-          backgroundColor: Colors.black,
-          actions: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 5),
-              child: IconButton(
-                onPressed: () {},
-                icon: Icon(
-                  Icons.favorite_border_rounded,
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 5),
-              child: IconButton(
-                onPressed: logoutuser,
-                icon: Icon(
-                  Icons.send_rounded,
-                ),
-              ),
-            ),
-          ],
-          title: SvgPicture.network(
-            "https://www.vectorlogo.zone/logos/instagram/instagram-wordmark.svg",
-            color: Colors.white,
-            height: 45,
-            width: 45,
-          )),
-      body: Column(children: [
-        SizedBox(
-          height: 100,
-        ),
-        PostWidget(
-            likePressed: () {},
-            writeComments: () {},
-            sharePressed: () {},
-            viewAllComments: () {},
-            profileImageName: "assets/images/ProfilePcture3.png",
-            postImageName: "assets/images/Post image 1.png",
-            userName: "iamsiam",
-            likes: "158",
-            postTitel:
-                'Flutter is Google’s mobile UI open source framework to build high-quality native (super fast) interfaces for iOS and Android apps with the unified codebase.'),
-      ]),
+      body: pages[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Colors.black,
         selectedItemColor: Colors.white,
@@ -98,6 +67,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.tv_rounded),
+            backgroundColor: Colors.black,
+            label: '',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.account_circle_outlined),
             backgroundColor: Colors.black,
             label: '',
           ),

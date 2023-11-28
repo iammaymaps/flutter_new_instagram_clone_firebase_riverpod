@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_new_instagram_clone_firebase_riverpod/HomeScreen.dart';
+import 'package:flutter_new_instagram_clone_firebase_riverpod/features/BottomPage/HomeScreen.dart';
 import 'package:flutter_new_instagram_clone_firebase_riverpod/features/auth/Loader.dart';
 import 'package:flutter_new_instagram_clone_firebase_riverpod/features/auth/domain/authController.dart';
 import 'package:flutter_new_instagram_clone_firebase_riverpod/features/auth/errorText.dart';

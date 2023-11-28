@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_new_instagram_clone_firebase_riverpod/HomeScreen.dart';
+import 'package:flutter_new_instagram_clone_firebase_riverpod/features/BottomPage/HomeScreen.dart';
 import 'package:flutter_new_instagram_clone_firebase_riverpod/features/auth/pages/loginPage.dart';
 import 'package:flutter_new_instagram_clone_firebase_riverpod/features/auth/pages/signUppage.dart';
 import 'package:flutter_new_instagram_clone_firebase_riverpod/navigation/routerContastant.dart';
