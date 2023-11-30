@@ -30,9 +30,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   }
 
   List<Widget> pages = [
+    AddPostScreen(),
     HomePageScreen(),
     SearchScreen(),
-    AddPostScreen(),
     ReelsWatch(),
     ProfileScreen(),
   ];
