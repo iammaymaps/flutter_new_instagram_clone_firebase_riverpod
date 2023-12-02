@@ -6,8 +6,10 @@ import 'package:flutter_new_instagram_clone_firebase_riverpod/features/BottomPag
 import 'package:flutter_new_instagram_clone_firebase_riverpod/features/BottomPage/profileScreen.dart';
 import 'package:flutter_new_instagram_clone_firebase_riverpod/features/Post/PostWiget.dart';
 import 'package:flutter_new_instagram_clone_firebase_riverpod/features/auth/domain/authController.dart';
+import 'package:flutter_new_instagram_clone_firebase_riverpod/features/auth/utils.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
   HomeScreen({super.key});
@@ -17,30 +19,36 @@ class HomeScreen extends ConsumerStatefulWidget {
 }
 
 class _HomeScreenState extends ConsumerState<HomeScreen> {
-  int _selectedIndex = 0;
+  int _currentIndex = 0;
 
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
-
-  void logoutuser() {
-    ref.read(authControllerProvider.notifier).logOutUser();
-  }
-
-  List<Widget> pages = [
-    AddPostScreen(),
+  final List<Widget> _children = [
     HomePageScreen(),
     SearchScreen(),
+    AddPostScreen(),
     ReelsWatch(),
     ProfileScreen(),
   ];
 
+  void onTabTapped(int index) {
+    if (index == 2) {
+      ref.read(pickedFileProvider.notifier).pickImage();
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => AddPostScreen()),
+      );
+    } else {
+      setState(() {
+        _currentIndex = index;
+      });
+    }
+  }
+
+  // Learn the riverpod today
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: pages[_selectedIndex],
+      body: _children[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Colors.black,
         selectedItemColor: Colors.white,
@@ -76,12 +84,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             label: '',
           ),
         ],
-        currentIndex: _selectedIndex,
-        onTap: (index) {
-          setState(() {
-            _selectedIndex = index;
-          });
-        },
+        onTap: onTabTapped, currentIndex: _currentIndex,
       ),
     );
   }

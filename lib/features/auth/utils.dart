@@ -1,8 +1,8 @@
 import 'dart:typed_data';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 Future<Uint8List?> pickImage() async {
@@ -42,3 +42,20 @@ class StorageRepository {
     }
   }
 }
+
+class PickedFileNotifier extends StateNotifier<Uint8List?> {
+  PickedFileNotifier() : super(null);
+
+  Future<void> pickImage() async {
+    FilePickerResult? result =
+        await FilePicker.platform.pickFiles(type: FileType.image);
+
+    if (result != null) {
+      state = result.files.single.bytes;
+    }
+  }
+}
+
+final pickedFileProvider =
+    StateNotifierProvider<PickedFileNotifier, Uint8List?>(
+        (ref) => PickedFileNotifier());

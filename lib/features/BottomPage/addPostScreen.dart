@@ -1,8 +1,32 @@
-import 'package:flutter/material.dart';
+import 'dart:typed_data';
 
-class AddPostScreen extends StatelessWidget {
+import 'package:file_picker/file_picker.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_new_instagram_clone_firebase_riverpod/features/auth/utils.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:provider/provider.dart';
+
+class AddPostScreen extends ConsumerStatefulWidget {
+  @override
+  ConsumerState<AddPostScreen> createState() => _AddPostScreenState();
+}
+
+class _AddPostScreenState extends ConsumerState<AddPostScreen> {
+  Uint8List? profileImage;
+
+  Future<void> pickImage() async {
+    FilePickerResult? result =
+        await FilePicker.platform.pickFiles(type: FileType.image);
+
+    if (result != null) {
+      profileImage = result.files.single.bytes;
+      setState(() {});
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    final file = ref.watch(pickedFileProvider);
     return Scaffold(
       backgroundColor: Colors.black,
       body: Column(
@@ -12,12 +36,13 @@ class AddPostScreen extends StatelessWidget {
             child: Stack(
               children: [
                 // Your Image
-                Image.asset(
-                  'assets/images/ProfilePcture2.png', // Replace with your image URL
-                  height: 300.0,
-                  width: 600.0,
-                  fit: BoxFit.cover,
-                ),
+                if (file != null)
+                  Image.memory(
+                    file, // Replace with your image URL
+                    height: 300.0,
+                    width: 600.0,
+                    fit: BoxFit.cover,
+                  ),
                 // Close Button
                 Positioned(
                   top: 16.0,
