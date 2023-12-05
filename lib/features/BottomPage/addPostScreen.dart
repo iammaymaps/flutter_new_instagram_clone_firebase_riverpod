@@ -14,15 +14,7 @@ class AddPostScreen extends ConsumerStatefulWidget {
 class _AddPostScreenState extends ConsumerState<AddPostScreen> {
   Uint8List? profileImage;
 
-  Future<void> pickImage() async {
-    FilePickerResult? result =
-        await FilePicker.platform.pickFiles(type: FileType.image);
 
-    if (result != null) {
-      profileImage = result.files.single.bytes;
-      setState(() {});
-    }
-  }
 
   @override
   Widget build(BuildContext context) {

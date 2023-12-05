@@ -28,15 +28,17 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     ReelsWatch(),
     ProfileScreen(),
   ];
-
   void onTabTapped(int index) {
     if (index == 2) {
+      // Ensure that pickImage is not causing any blocking operations
       ref.read(pickedFileProvider.notifier).pickImage();
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => AddPostScreen()),
-      );
+
+      // Make sure context is valid
+      setState(() {
+        _currentIndex = 2;
+      });
     } else {
+      // Check if there are any heavy UI operations here
       setState(() {
         _currentIndex = index;
       });
