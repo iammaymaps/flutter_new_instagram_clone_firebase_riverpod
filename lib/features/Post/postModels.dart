@@ -3,9 +3,8 @@ class PostModels {
   final String username;
   final String postId;
   final String uid;
-  final String profileImage;
   final String postImage;
-  final int likes;
+  final List likes;
   final bool isSave;
   final String published;
   PostModels({
@@ -13,7 +12,6 @@ class PostModels {
     required this.username,
     required this.postId,
     required this.uid,
-    required this.profileImage,
     required this.postImage,
     required this.likes,
     required this.isSave,
@@ -26,7 +24,6 @@ class PostModels {
       'username': username,
       'postId': postId,
       'uid': uid,
-      'profileImage': profileImage,
       'postImage': postImage,
       'likes': likes,
       'isSave': isSave,
@@ -40,7 +37,6 @@ class PostModels {
       username: map['username'] ?? '',
       postId: map['postId'] ?? '',
       uid: map['uid'] ?? '',
-      profileImage: map['profileImage'] ?? '',
       postImage: map['postImage'] ?? '',
       likes: map['likes']?.toInt() ?? 0,
       isSave: map['isSave'] ?? false,

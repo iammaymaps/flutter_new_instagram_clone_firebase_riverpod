@@ -50,13 +50,13 @@ class AuthRepository {
 
         if (userCredential.additionalUserInfo != null &&
             userCredential.additionalUserInfo!.isNewUser) {
-          String photoUrl = await storageRepository.uploadProfileImage(
+          final photoUrl = await storageRepository.uploadProfileImage(
               userCredential.user!.uid, file);
 
           userModel = UserModel(
               email: email,
               fullname: fullname,
-              photoUrl: photoUrl,
+              photoUrl: photoUrl.toString(),
               uid: userCredential.user!.uid,
               username: username,
               followers: [],

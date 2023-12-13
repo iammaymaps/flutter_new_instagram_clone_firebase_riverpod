@@ -1,6 +1,4 @@
-import 'dart:io';
 import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_new_instagram_clone_firebase_riverpod/features/auth/Loader.dart';
 import 'package:flutter_new_instagram_clone_firebase_riverpod/features/auth/domain/authController.dart';

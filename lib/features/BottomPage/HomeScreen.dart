@@ -29,23 +29,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     ProfileScreen(),
   ];
   void onTabTapped(int index) {
-    if (index == 2) {
-      // Ensure that pickImage is not causing any blocking operations
-      ref.read(pickedFileProvider.notifier).pickImage();
-
-      // Make sure context is valid
-      setState(() {
-        _currentIndex = 2;
-      });
-    } else {
-      // Check if there are any heavy UI operations here
-      setState(() {
-        _currentIndex = index;
-      });
-    }
+    setState(() {
+      _currentIndex = index;
+    });
   }
-
-  // Learn the riverpod today
 
   @override
   Widget build(BuildContext context) {
